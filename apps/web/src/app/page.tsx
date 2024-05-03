@@ -1,95 +1,56 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Book from '@/components/Book/Book';
+import Footer from '@/components/Footer/Footer';
+import Navbar from '@/components/Navbar/Navbar';
+import Container from '@/components/Container';
+import Hero from '@/components/hero/hero';
+import Section from '@/components/hero/section';
+import Schedule from '@/components/Schedule/schedule';
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div>
+      {/* <Container> */}
+        {/* <Navbar /> */}
+        <div className="relative">
+          <svg
+            className="absolute top-0 left-0 right-0 bottom-0 -z-20 w-full h-auto opacity-20"
+            width="1502"
+            height="1145"
+            viewBox="0 0 1502 1145"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+            <path
+              d="M1 1L181.247 1119.45L329.925 1L496.52 1119.456L653.09 1L835.258 1144L987.988 1L1160.34 1119.45L1289.61 1L1501 111.9"
+              fill="#FFF"
+              fill-opacity="0.1"
+              stroke="#FFF"
+              stroke-width="0.5"
+              stroke-linejoin="round"
             />
-          </a>
+            <defs>
+              <linearGradient
+                id="paint0_linear_420_4"
+                x1="751"
+                y1="1"
+                x2="751"
+                y2="1144"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stopColor="white" stopOpacity="0.72" />
+                <stop offset="1" stopColor="white" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <Hero />
+          <Section />
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+        <Section />
+        <hr className="w-full mt-16" />
+        <Schedule />
+        <Book />
+      {/* </Container> */}
+      <Footer />
+    </div>
+  );
 }
