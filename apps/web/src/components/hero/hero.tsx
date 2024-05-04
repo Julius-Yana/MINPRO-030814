@@ -14,12 +14,12 @@ const Hero = () => {
 
   const item = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: 'smooth' } }, // Corrected typo "smoth" to "smooth"
+    show: { opacity: 1, y: 0, transition: { type: 'smooth' } }, 
   };
 
   const image = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: 'smooth' } }, // Corrected typo "smoth" to "smooth"
+    show: { opacity: 1, y: 0, transition: { type: 'smooth' } }, 
   };
   return (
     <div className="pt-28">
@@ -30,25 +30,13 @@ const Hero = () => {
         variants={container}
         className="flex flex-col items-center justify-between "
       >
-        <motion.h1
-          variants={item}
-          className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl"
-        >
-          Musik adalah cara
-        </motion.h1>
+        <h1 className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl">Still in 90's atmosphere </h1>
+        <p className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl">Event Live Boysband</p>
         <motion.p
           variants={item}
-          className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl"
-        >
-          Untuk memberi tahu apa yg kita RASA
-        </motion.p>
-        {/* <motion.p
-          variants={item}
           className="text-xl text-center w-10/12 mx-auto tracking-wider text-neutral-400 max-lg:text-base max-md:text-sm"
-        >
-          Tiket is a music platform that allows you to listen to your favorite
-          music online.
-        </motion.p> */}
+        ><p>Event grup BoysBand era 90an ini dijamin bikin nuansa konsermu tambah asikk sambil nostalgia 🎶</p> 
+        </motion.p>
       </motion.div>
       <div className="mt-28 text-white">
         <div className="p-2 relative">
@@ -57,8 +45,8 @@ const Hero = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, type: 'keyframes' }}
-            className="w-full lg:h-[700px] md:h-[500px] h-[300px] object-cover object-top opacity-100"
-            src="/bsb.webp"
+            className="w-full lg:h-auto md:h-[500px] h-[200px] object-cover object-top opacity-100"
+            src="/boysband90.jpg"
             alt="backstreetBoys"
           />
           <motion.div
@@ -68,7 +56,7 @@ const Hero = () => {
             viewport={{ once: true }}
             transition={{ delay: 1.5, delayChildren: 0.1 }}
           >
-            <motion.span className="absolute top-4 left-4 lg:text-7xl text-4xl text-black">
+            {/* <motion.span className="absolute top-4 left-4 lg:text-7xl text-4xl text-black">
               Backstreet Boys
             </motion.span>
             <motion.span className="absolute bottom-8 left-4 lg:text-xl md:text-base text-sm max-sm:hidden">
@@ -82,7 +70,7 @@ const Hero = () => {
             </motion.span>
             <motion.span className="absolute right-4 bottom-4 lg:text-xl md:text-base text-sm">
               Jakarta, December 12
-            </motion.span>
+            </motion.span>  */}
           </motion.div>
         </div>
       </div>
