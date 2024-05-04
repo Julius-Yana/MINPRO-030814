@@ -43,7 +43,7 @@ const Section = () => {
         className="md:grid grid-cols-2 gap-x-7 space-y-10"
       >
         <motion.img variants={image} src="/westlife.png" alt="westlife" />
-        <div className="hidden md:block text-4xl md:text-7xl text-neutral-800 flex items-center font-extrabold uppercase">
+        <div className="hidden md:block text-4xl md:text-7xl text-slate-400 flex items-center font-extrabold uppercase">
           Elegant
         </div>
         <motion.div variants={item}>
@@ -114,7 +114,7 @@ const Section = () => {
           src="/nsync.jpg"
           alt="nsync"
         />
-        <div className="hidden md:block text-4xl md:text-7xl text-neutral-800 flex items-center mb-20 font-extrabold uppercase">
+        <div className="hidden md:block text-4xl md:text-7xl text-slate-400 flex items-center mb-20 font-extrabold uppercase">
           Events
         </div>
         <motion.div variants={item}>

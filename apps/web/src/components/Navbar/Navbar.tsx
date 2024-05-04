@@ -48,7 +48,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="border-slate-600 hover:border-primary hover:bg-primary hover:text-white"
-                href=""
+                href="/event"
               >
                 Event
               </Link>
