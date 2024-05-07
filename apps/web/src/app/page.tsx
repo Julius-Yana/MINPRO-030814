@@ -9,8 +9,6 @@ import Schedule from '@/components/Schedule/schedule';
 export default function Home() {
   return (
     <div>
-      {/* <Container> */}
-      {/* <Navbar /> */}
       <div className="relative">
         <svg
           className="absolute top-0 left-0 right-0 bottom-0 -z-20 w-full h-auto opacity-20"
@@ -45,11 +43,8 @@ export default function Home() {
         <Hero />
         <Section />
       </div>
-      <Section />
       <hr className="w-full mt-16" />
-      <Schedule />
       <Book />
-      {/* </Container> */}
       <Footer />
     </div>
   );

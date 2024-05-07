@@ -10,6 +10,7 @@
     "test": "npx cypress verify & cypress run --component"
   },
   "dependencies": {
+    "@themesberg/tailwind-datepicker": "^1.1.0",
     "framer-motion": "^11.1.7",
     "next": "14.0.4",
     "react": "^18",

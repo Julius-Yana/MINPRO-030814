@@ -1,279 +1,199 @@
 import React from 'react';
 import Link from 'next/link';
+import Footer from '@/components/Footer/Footer';
+import Datepicker from '@themesberg/tailwind-datepicker/Datepicker';
+import DateRangePicker from '@themesberg/tailwind-datepicker/DateRangePicker';
 
 export default function event() {
   return (
-    <div className="container mx-auto ">
-      <div className="h-70 ">
-        <div className="flex items-start space-x-12 ">
-          <div>
-            <img className="w-96" src="/westlife.png" alt="westlife" />
-            <div className="w-full">
-              <h1 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
-                Westlife
-              </h1>
-              <p className="text-sm text-slate-200 sm:text-xl">Back to 90'</p>
-              <div className="text-slate-200 mt-3 sm:text-sm">
-                <p className="text-2xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 4h10a2 2 0 011.99 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h10a2 2 0 012-2V7H6a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V10a2 2 0 00-2-2H6a2 2 0 012-2z"
-                    />
-                  </svg>
-                  01 Juni 2024
-                </p>
-                <p className="text-4xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1}
-                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 01.553-.894L9 2m0 18l5.447 2.724A1 1 0 0015 20.382V9.618a1 1 0 00-.553-.894L9 6m0 14V6m0 0L3 9.382m6-3.764L15 9.382M15 6v14.382a1 1 0 01-.553.894L9 23.382"
-                    />
-                  </svg>
-                  Surabaya
-                </p>
+    <div>
+      <div className="flex flex-row">
+        <div className="basis-3/4">
+          <h1 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
+            List Event
+          </h1>
+          <div className="container mx-auto p-10 ">
+            <div className="h-70 ">
+              <div className="flex items-start space-x-10 ">
+                <div className="card w-96 bg-base-100 shadow-xl">
+                  <figure>
+                    <img src="/98.webp" alt="Shoes" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">98 degress</h2>
+                    <p>Back to 90'</p>
+                    <p>01 Juni 2024</p>
+                    <h2 className="card-title">GRATIS</h2>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">
+                        <Link href="/beli">Beli Tiket</Link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-                <p className="text-4xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-2.28 0-4 1.79-4 4s1.72 4 4 4 4-1.79 4-4-1.72-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM12 6V4m0 16v-2m8-8h2M4 12H2m16 4h2m-2-8h2M6 18v2m0-16V2m12 0v2m-6 16h4m-6 0H6m6-16h-4m6 0H6m6 16V6m0 0V4"
-                    />
-                  </svg>
-                  Rp 100.000
-                </p>
+                <div className="card w-96 bg-base-100 shadow-xl">
+                  <figure>
+                    <img src="/98.webp" alt="Shoes" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">A1</h2>
+                    <p>Back to 90'</p>
+                    <p>01 Juli 2024</p>
+                    <h2 className="card-title">Rp. 100.000</h2>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">
+                        <Link href="/beli">Beli Tiket</Link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl">
+                  <figure>
+                    <img src="/98.webp" alt="Shoes" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">boyzone</h2>
+                    <p>Back to 90'</p>
+                    <p>01 Agustus 2024</p>
+                    <h2 className="card-title">Rp. 200.000</h2>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">
+                        <Link href="/beli">Beli Tiket</Link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <button className="px-5 py-2 border-2 mt-5 border-white hover:bg-white hover:text-black transition-all ease-in duration-200">
-                <Link href="/beli">Beli Tiket</Link>
-              </button>
             </div>
-          </div>
-          <div>
-            <img className="w-96" src="/westlife.png" alt="westlife" />
-            <div className="w-full">
-              <h1 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
-                Westlife
-              </h1>
-              <p className="text-sm text-slate-200 sm:text-xl">Back to 90'</p>
-              <div className="text-slate-200 mt-3 sm:text-sm">
-                <p className="text-2xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 4h10a2 2 0 011.99 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h10a2 2 0 012-2V7H6a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V10a2 2 0 00-2-2H6a2 2 0 012-2z"
-                    />
-                  </svg>
-                  01 Juli 2024
-                </p>
-                <p className="text-4xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1}
-                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 01.553-.894L9 2m0 18l5.447 2.724A1 1 0 0015 20.382V9.618a1 1 0 00-.553-.894L9 6m0 14V6m0 0L3 9.382m6-3.764L15 9.382M15 6v14.382a1 1 0 01-.553.894L9 23.382"
-                    />
-                  </svg>
-                  Aceh
-                </p>
+            <hr className="w-full mt-16" />
+            <div className="h-70 ">
+              <div className="flex items-start space-x-10 ">
+                <div className="card w-96 bg-base-100 shadow-xl">
+                  <figure>
+                    <img src="/98.webp" alt="Shoes" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">BackstreetBoys</h2>
+                    <p>Back to 90'</p>
+                    <p>01 September 2024</p>
+                    <h2 className="card-title">Rp. 300.000</h2>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">
+                        <Link href="/beli">Beli Tiket</Link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-                <p className="text-4xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-2.28 0-4 1.79-4 4s1.72 4 4 4 4-1.79 4-4-1.72-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM12 6V4m0 16v-2m8-8h2M4 12H2m16 4h2m-2-8h2M6 18v2m0-16V2m12 0v2m-6 16h4m-6 0H6m6-16h-4m6 0H6m6 16V6m0 0V4"
-                    />
-                  </svg>
-                  Rp 200.000
-                </p>
+                <div className="card w-96 bg-base-100 shadow-xl">
+                  <figure>
+                    <img src="/98.webp" alt="Shoes" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">NSYNC</h2>
+                    <p>Back to 90'</p>
+                    <p>01 Oktober 2024</p>
+                    <h2 className="card-title">Rp. 400.000</h2>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">
+                        <Link href="/beli">Beli Tiket</Link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="card w-96 bg-base-100 shadow-xl">
+                  <figure>
+                    <img src="/98.webp" alt="Shoes" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">ULTRA</h2>
+                    <p>Back to 90'</p>
+                    <p>01 November 2024</p>
+                    <h2 className="card-title">Rp. 500.000</h2>
+                    <div className="card-actions justify-end">
+                      <button className="btn btn-primary">
+                        <Link href="/beli">Beli Tiket</Link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <button className="px-5 py-2 border-2 mt-5 border-white hover:bg-white hover:text-black transition-all ease-in duration-200">
-                <Link href="/beli">Beli Tiket</Link>
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <img className="w-96" src="/westlife.png" alt="westlife" />
-            <div className="w-full">
-              <h1 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
-                Westlife
-              </h1>
-              <p className="text-sm text-slate-200 sm:text-xl">Back to 90'</p>
-              <div className="text-slate-200 mt-3 sm:text-sm">
-                <p className="text-2xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 4h10a2 2 0 011.99 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h10a2 2 0 012-2V7H6a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V10a2 2 0 00-2-2H6a2 2 0 012-2z"
-                    />
-                  </svg>
-                  01 Agustus 2024
-                </p>
-                <p className="text-4xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1}
-                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 01.553-.894L9 2m0 18l5.447 2.724A1 1 0 0015 20.382V9.618a1 1 0 00-.553-.894L9 6m0 14V6m0 0L3 9.382m6-3.764L15 9.382M15 6v14.382a1 1 0 01-.553.894L9 23.382"
-                    />
-                  </svg>
-                  Medan
-                </p>
-
-                <p className="text-4xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-2.28 0-4 1.79-4 4s1.72 4 4 4 4-1.79 4-4-1.72-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM12 6V4m0 16v-2m8-8h2M4 12H2m16 4h2m-2-8h2M6 18v2m0-16V2m12 0v2m-6 16h4m-6 0H6m6-16h-4m6 0H6m6 16V6m0 0V4"
-                    />
-                  </svg>
-                  Rp 300.000
-                </p>
-              </div>
-              <button className="px-5 py-2 border-2 mt-5 border-white hover:bg-white hover:text-black transition-all ease-in duration-200">
-                <Link href="/beli">Beli Tiket</Link>
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <img className="w-96" src="/westlife.png" alt="westlife" />
-            <div className="w-full">
-              <h1 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
-                Westlife
-              </h1>
-              <p className="text-sm text-slate-200 sm:text-xl">Back to 90'</p>
-              <div className="text-slate-200 mt-3 sm:text-sm">
-                <p className="text-2xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 4h10a2 2 0 011.99 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h10a2 2 0 012-2V7H6a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V10a2 2 0 00-2-2H6a2 2 0 012-2z"
-                    />
-                  </svg>
-                  01 September 2024
-                </p>
-                <p className="text-4xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1}
-                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 01.553-.894L9 2m0 18l5.447 2.724A1 1 0 0015 20.382V9.618a1 1 0 00-.553-.894L9 6m0 14V6m0 0L3 9.382m6-3.764L15 9.382M15 6v14.382a1 1 0 01-.553.894L9 23.382"
-                    />
-                  </svg>
-                  Tasikmalaya
-                </p>
-
-                <p className="text-4xl mt-7 mb-4 sm:text-3xl">
-                  <svg
-                    className="inline-block w-6 h-6 mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8c-2.28 0-4 1.79-4 4s1.72 4 4 4 4-1.79 4-4-1.72-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM12 6V4m0 16v-2m8-8h2M4 12H2m16 4h2m-2-8h2M6 18v2m0-16V2m12 0v2m-6 16h4m-6 0H6m6-16h-4m6 0H6m6 16V6m0 0V4"
-                    />
-                  </svg>
-                  Rp 400.000
-                </p>
-              </div>
-              <button className="px-5 py-2 border-2 mt-5 border-white hover:bg-white hover:text-black transition-all ease-in duration-200">
-                <Link href="/beli">Beli Tiket</Link>
-              </button>
             </div>
           </div>
         </div>
+        <div className="basis-1/4">
+          <div className="container mx-auto p-10 ">
+            <form>
+              <label className="input input-bordered flex items-center gap-2">
+                <input type="text" className="grow" placeholder="Search" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  className="w-4 h-4 opacity-70"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </label>
+            </form>
+            <h2 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
+              Kategori
+            </h2>
+            <select className="select select-info w-full max-w-xs scroll-mt-10">
+              <option disabled selected>
+                Kategori Event
+              </option>
+              <option>Kategori A</option>
+              <option>Kategori B</option>
+              <option>Kategori C</option>
+            </select>
+
+            <h2 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
+              Tanggal
+            </h2>
+            <h2 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">Price</h2>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="40"
+              className="range range-primary"
+            />
+          </div>
+          <div className='border bottom-1'>
+          <div className="form-control">
+            <label className="label cursor-pointer">
+              <span className="label-text text-4xl mt-7 mb-4 sm:text-3xl uppercase ">Event Gratis</span>
+              <input
+                type="radio"
+                name="radio-10"
+                className="radio checked:bg-red-500"
+                checked
+              />
+            </label>
+          </div>
+          <div className="form-control">
+            <label className="label cursor-pointer">
+              <span className="label-text text-4xl mt-7 mb-4 sm:text-3xl uppercase">Event Berbayar</span>
+              <input
+                type="radio"
+                name="radio-10"
+                className="radio checked:bg-blue-500"
+                checked
+              />
+            </label>
+          </div>
+        </div>
       </div>
+      </div>
+      
+
+      <Footer />
     </div>
   );
 }
