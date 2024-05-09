@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Footer from '@/components/Footer/Footer';
-import Datepicker from '@themesberg/tailwind-datepicker/Datepicker';
-import DateRangePicker from '@themesberg/tailwind-datepicker/DateRangePicker';
+// import Datepicker from '@themesberg/tailwind-datepicker/Datepicker';
+// import DateRangePicker from '@themesberg/tailwind-datepicker/DateRangePicker';
 
 export default function event() {
   return (
@@ -21,8 +21,10 @@ export default function event() {
                   </figure>
                   <div className="card-body">
                     <h2 className="card-title">98 degress</h2>
+                    {/* <p>Back to 90'</p> */}
                     <p>Back to 90'</p>
                     <p>01 Juni 2024</p>
+                    <p>Jakarta</p>
                     <h2 className="card-title">GRATIS</h2>
                     <div className="card-actions justify-end">
                       <button className="btn btn-primary">
@@ -40,6 +42,7 @@ export default function event() {
                     <h2 className="card-title">A1</h2>
                     <p>Back to 90'</p>
                     <p>01 Juli 2024</p>
+                    <p>Bogor</p>
                     <h2 className="card-title">Rp. 100.000</h2>
                     <div className="card-actions justify-end">
                       <button className="btn btn-primary">
@@ -56,6 +59,7 @@ export default function event() {
                     <h2 className="card-title">boyzone</h2>
                     <p>Back to 90'</p>
                     <p>01 Agustus 2024</p>
+                    <p>Ciawi</p>
                     <h2 className="card-title">Rp. 200.000</h2>
                     <div className="card-actions justify-end">
                       <button className="btn btn-primary">
@@ -66,8 +70,8 @@ export default function event() {
                 </div>
               </div>
             </div>
-            <hr className="w-full mt-16" />
-            <div className="h-70 ">
+            {/* <hr className="w-full mt-16 bg-transparent" /> */}
+            <div className="h-70 mt-16 ">
               <div className="flex items-start space-x-10 ">
                 <div className="card w-96 bg-base-100 shadow-xl">
                   <figure>
@@ -77,6 +81,7 @@ export default function event() {
                     <h2 className="card-title">BackstreetBoys</h2>
                     <p>Back to 90'</p>
                     <p>01 September 2024</p>
+                    <p>Cipularang</p>
                     <h2 className="card-title">Rp. 300.000</h2>
                     <div className="card-actions justify-end">
                       <button className="btn btn-primary">
@@ -94,6 +99,7 @@ export default function event() {
                     <h2 className="card-title">NSYNC</h2>
                     <p>Back to 90'</p>
                     <p>01 Oktober 2024</p>
+                    <p>Sumedang</p>
                     <h2 className="card-title">Rp. 400.000</h2>
                     <div className="card-actions justify-end">
                       <button className="btn btn-primary">
@@ -110,6 +116,7 @@ export default function event() {
                     <h2 className="card-title">ULTRA</h2>
                     <p>Back to 90'</p>
                     <p>01 November 2024</p>
+                    <p>Dawuan</p>
                     <h2 className="card-title">Rp. 500.000</h2>
                     <div className="card-actions justify-end">
                       <button className="btn btn-primary">
@@ -120,10 +127,40 @@ export default function event() {
                 </div>
               </div>
             </div>
+            <center>
+              <br></br>
+              <div className="join">
+                <input
+                  className="join-item btn btn-square"
+                  type="radio"
+                  name="options"
+                  aria-label="1"
+                  checked
+                />
+                <input
+                  className="join-item btn btn-square"
+                  type="radio"
+                  name="options"
+                  aria-label="2"
+                />
+                <input
+                  className="join-item btn btn-square"
+                  type="radio"
+                  name="options"
+                  aria-label="3"
+                />
+                <input
+                  className="join-item btn btn-square"
+                  type="radio"
+                  name="options"
+                  aria-label="4"
+                />
+              </div>
+            </center>
           </div>
         </div>
-        <div className="basis-1/4">
-          <div className="container mx-auto p-10 ">
+        <div className="pt-32 basis-1/4">
+          <div className="container mx-auto  ">
             <form>
               <label className="input input-bordered flex items-center gap-2">
                 <input type="text" className="grow" placeholder="Search" />
@@ -141,7 +178,7 @@ export default function event() {
                 </svg>
               </label>
             </form>
-            <h2 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
+            <h2 className=" text-4xl  mt-7 mb-4 sm:text-3xl uppercase">
               Kategori
             </h2>
             <select className="select select-info w-full max-w-xs scroll-mt-10">
@@ -165,10 +202,12 @@ export default function event() {
               className="range range-primary"
             />
           </div>
-          <div className='border bottom-1'>
+
           <div className="form-control">
             <label className="label cursor-pointer">
-              <span className="label-text text-4xl mt-7 mb-4 sm:text-3xl uppercase ">Event Gratis</span>
+              <span className="text-4xl mt-7 mb-4 sm:text-3xl uppercase ">
+                Event Gratis
+              </span>
               <input
                 type="radio"
                 name="radio-10"
@@ -179,7 +218,9 @@ export default function event() {
           </div>
           <div className="form-control">
             <label className="label cursor-pointer">
-              <span className="label-text text-4xl mt-7 mb-4 sm:text-3xl uppercase">Event Berbayar</span>
+              <span className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
+                Event Berbayar
+              </span>
               <input
                 type="radio"
                 name="radio-10"
@@ -190,8 +231,6 @@ export default function event() {
           </div>
         </div>
       </div>
-      </div>
-      
 
       <Footer />
     </div>

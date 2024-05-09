@@ -1,37 +1,108 @@
+import Footer from "@/components/Footer/Footer";
+import LoginForm from "@/components/login/loginform";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as yup from 'yup'
+
+
 export default function Login() {
   return (
-    <div className="container mx-auto">
-      <form>
-        <div className="min-w-28 max-w-96 mx-auto flex flex-col gap-3 py-10 px-10 rounded-md">
-          <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="w-4 h-4 opacity-70"
-            >
-              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-            </svg>
-            <input type="text" className="grow" placeholder="Username" />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="w-4 h-4 opacity-70"
-            >
-              <path
-                fillRule="evenodd"
-                d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <input type="password" className="grow" value="password" />
-          </label>
-          <button className="btn">Button</button>
-        </div>
-      </form>
+    <div>
+      <LoginForm/>
+      <Footer/>
     </div>
+    // <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    //   <div className="mx-auto max-w-lg text-center">
+    //     <h1 className="text-2xl font-bold sm:text-3xl">
+    //       Masuk untuk membeli tiket!
+    //     </h1>
+    //   </div>
+
+    //   <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+    //     <div>
+    //       <label htmlFor="email" className="sr-only">
+    //         Email
+    //       </label>
+
+    //       <div className="relative">
+    //         <input
+    //           type="email"
+    //           className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+    //           placeholder="Enter email"
+    //         />
+
+    //         <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+    //           <svg
+    //             xmlns="http://www.w3.org/2000/svg"
+    //             className="size-4 text-gray-400"
+    //             fill="none"
+    //             viewBox="0 0 24 24"
+    //             stroke="currentColor"
+    //           >
+    //             <path
+    //               strokeLinecap="round"
+    //               strokeLinejoin="round"
+    //               strokeWidth="2"
+    //               d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+    //             />
+    //           </svg>
+    //         </span>
+    //       </div>
+    //     </div>
+
+    //     <div>
+    //       <label htmlFor="password" className="sr-only">
+    //         Password
+    //       </label>
+
+    //       <div className="relative">
+    //         <input
+    //           type="password"
+    //           className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+    //           placeholder="Enter password"
+    //         />
+
+    //         <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+    //           <svg
+    //             xmlns="http://www.w3.org/2000/svg"
+    //             className="size-4 text-gray-400"
+    //             fill="none"
+    //             viewBox="0 0 24 24"
+    //             stroke="currentColor"
+    //           >
+    //             <path
+    //               strokeLinecap="round"
+    //               strokeLinejoin="round"
+    //               strokeWidth="2"
+    //               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+    //             />
+    //             <path
+    //               strokeLinecap="round"
+    //               strokeLinejoin="round"
+    //               strokeWidth="2"
+    //               d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+    //             />
+    //           </svg>
+    //         </span>
+    //       </div>
+    //     </div>
+
+    //     <div className="flex items-center justify-between">
+    //       <p className="text-sm text-gray-500">
+    //         Tidak punya akun?
+    //         <a className="underline" href="#">
+    //           Daftar
+    //         </a>
+    //       </p>
+
+    //       <button
+    //         type="submit"
+    //         className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+    //       >
+    //         Sign in
+    //       </button>
+    //     </div>
+    //   </form>
+    // </div>
+    
   );
 }

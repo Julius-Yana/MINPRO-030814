@@ -56,7 +56,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="border-slate-600 hover:border-primary hover:bg-primary hover:text-white"
-                href=""
+                href="/tentang"
               >
                 Tentang Kami
               </Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="border-slate-600 hover:border-primary hover:bg-primary hover:text-white"
-                href=""
+                href="/kontak"
               >
                 Kontak
               </Link>
@@ -79,11 +79,11 @@ const Navbar = () => {
             variants={container}
             className="flex flex-row items-center justify-between cursor-pointer space-x-5"
           >
-            <button className="lg:px-7 py-2 px-10 bg-white text-black">
+            <button className="lg:px-7 py-2 px-10 bg-emerald-500 text-black rounded-sm">
               <Link href="/login">Log In</Link>
             </button>
-            <button className="lg:px-7 py-2 px-10 bg-white text-black">
-              <Link href="/register">Register</Link>
+            <button className="lg:px-7 py-2 px-10 bg-white text-black rounded-sm">
+              <Link href="/register ">Register</Link>
             </button>
           </motion.div>
         </div>

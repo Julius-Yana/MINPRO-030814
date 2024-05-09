@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@themesberg/tailwind-datepicker": "^1.1.0",
+    "formik": "^2.4.6",
     "framer-motion": "^11.1.7",
     "next": "14.0.4",
+    "preline": "^2.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -179,13 +179,13 @@ const Section = () => {
           </button>
         </motion.div>
 
-        <motion.img variants={image} src="/westlife.png" alt="westlife" />
+        <motion.img variants={image} src="/bsb.webp" alt="BackstreetBoys" />
         <div className="hidden md:block text-4xl md:text-7xl text-slate-400 flex items-center font-extrabold uppercase">
           Elegant
         </div>
         <motion.div variants={item}>
           <h1 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">
-            Westlife 2
+            Backstreet Boys
           </h1>
           <p className="text-sm text-slate-200 sm:text-xl">Back to 90'</p>
           <div className="text-slate-200 mt-3 sm:text-sm">
@@ -239,7 +239,7 @@ const Section = () => {
                   d="M12 8c-2.28 0-4 1.79-4 4s1.72 4 4 4 4-1.79 4-4-1.72-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM12 6V4m0 16v-2m8-8h2M4 12H2m16 4h2m-2-8h2M6 18v2m0-16V2m12 0v2m-6 16h4m-6 0H6m6-16h-4m6 0H6m6 16V6m0 0V4"
                 />
               </svg>
-              Rp 100.000
+              Rp 300.000
             </p>
           </div>
 
@@ -250,14 +250,14 @@ const Section = () => {
         <motion.img
           variants={image}
           className="md:mt-[40px]"
-          src="/nsync.jpg"
-          alt="nsync"
+          src="/a12.jpg"
+          alt="A1"
         />
         <div className="hidden md:block text-4xl md:text-7xl text-slate-400 flex items-center mb-20 font-extrabold uppercase">
           Events
         </div>
         <motion.div variants={item}>
-          <h1 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">Nsync 2</h1>
+          <h1 className="text-4xl mt-7 mb-4 sm:text-3xl uppercase">A1</h1>
           <p className="text-sm text-slate-200 sm:text-xl">
             Tour allround the World
           </p>
@@ -311,7 +311,7 @@ const Section = () => {
                 d="M12 8c-2.28 0-4 1.79-4 4s1.72 4 4 4 4-1.79 4-4-1.72-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM12 6V4m0 16v-2m8-8h2M4 12H2m16 4h2m-2-8h2M6 18v2m0-16V2m12 0v2m-6 16h4m-6 0H6m6-16h-4m6 0H6m6 16V6m0 0V4"
               />
             </svg>
-            Rp. 250.000
+            Rp. 500.000
           </p>
           <button className="px-5 py-2 border-2 mt-5 border-white hover:bg-white hover:text-black transition-all ease-in duration-200">
             <Link href="/beli">Beli Tiket</Link>
