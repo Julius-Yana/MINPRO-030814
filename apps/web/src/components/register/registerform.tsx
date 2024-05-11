@@ -9,8 +9,12 @@ const LoginSchema = yup.object().shape({
     .string()
     .min(6, 'Password harus terdiri dari minimal 6 karakter')
     .required('Password diperlukan'),
-  confirmPassword: yup.string()
-    .oneOf([yup.ref('password'), null], 'Password dan Konfirmasi Password harus sama')
+  confirmPassword: yup
+    .string()
+    .oneOf(
+      [yup.ref('password'), null],
+      'Password dan Konfirmasi Password harus sama',
+    )
     .required('Konfirmasi Password diperlukan'),
 });
 
@@ -37,9 +41,11 @@ export default function RegisterForm() {
                 <h1 className="text-2xl font-bold sm:text-3xl">
                   Buat akun untuk membeli tiket
                 </h1>
-                <div className='flex justify-center mb-0'>
+                <div className="flex justify-center mb-0">
                   <p>Sudah punya akun?</p>
-                  <a className='text-info' href='/'>Masuk</a>
+                  <a className="text-info" href="/">
+                    Masuk
+                  </a>
                 </div>
               </div>
               <div className="mt-10">
@@ -59,6 +65,7 @@ export default function RegisterForm() {
                   />
                 </div>
               </div>
+              
               <div className="mt-10">
                 <label className="block text-sm font-medium leading-6 text-white">
                   Email
@@ -91,7 +98,7 @@ export default function RegisterForm() {
                     component={'div'}
                     className="text-sm text-red-500"
                   />
-                  <div className='password-button' data-pasword-field-btn></div>
+                  <div className="password-button" data-password-field-btn></div>
                 </div>
               </div>
               <div>
@@ -109,8 +116,38 @@ export default function RegisterForm() {
                     component={'div'}
                     className="text-sm text-red-500"
                   />
-                  <div className='password-button' data-pasword-field-btn></div>
+                  <div className="password-button" data-password-field-btn></div>
                 </div>
+              </div>
+              <div className="mt-10">
+                <label className="block text-sm font-medium leading-6 text-white">
+                  Referral Code
+                </label>
+                <div className="mt-2 flex items-center">
+                  <Field
+                    name="referralCode"
+                    type="text"
+                    className="block w-full rounded-md border-0 p-8 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6 mr-2"
+                  />
+                  {/* Checkbox di samping form referral code */}
+                  <label className="text-white">
+                    <Field
+                      type="checkbox"
+                      name="referralCodeCheckbox"
+                      className="form-checkbox h-5 w-5 text-indigo-600"
+                    />
+                    <span className="ml-2">Saya memiliki kode referral</span>
+                  </label>
+                </div>
+                <ErrorMessage
+                  name="referralCode"
+                  component={'div'}
+                  className="text-sm text-red-500"
+                />
+              </div>
+              {/* Form lainnya */}
+              <div className="mt-10">
+                {/* Form lainnya */}
               </div>
               <button
                 type="submit"

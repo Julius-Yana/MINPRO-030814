@@ -49,7 +49,6 @@ export default function LoginForm() {
                 <div className='flex justify-center mb-0'>
                   <p>Tidak puny akun ?</p>
                   <a className='text-info' href='/'>  Daftar Sekarang</a> 
-
                 </div>
               </div>
               <div className="mt-10">
@@ -72,14 +71,12 @@ export default function LoginForm() {
               <div>
                 <label className="block text-sm font-medium leading-6 text-white">
                   Password
-                  
                 </label>
                 <div className="mt-2">
                   <Field
                     name="password"
                     type="password"
                     className="block w-full rounded-md border-0 p-8 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  
                   />
                   <ErrorMessage
                     name="password"
@@ -88,6 +85,10 @@ export default function LoginForm() {
                   />
                   <div className='password-button' data-pasword-field-btn></div>
                 </div>
+              </div>
+              {/* Teks lupa kata sandi */}
+              <div className="mt-2 text-sm text-white text-center">
+                <a href="/reset">Lupa kata sandi?</a>
               </div>
               <button
                 type="submit"
