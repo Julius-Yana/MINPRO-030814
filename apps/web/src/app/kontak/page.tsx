@@ -7,11 +7,13 @@ export default function kontak() {
     <div className="pt-28">
           <div className="text-xl text-center w-10/12 mx-auto tracking-wider text-neutral-400 max-lg:text-base max-md:text-sm"
         >
-           Jl. Raya Kalirungkut | RUNGKUT MEGAH RAYA B/36, Kali Rungkut, Kec. Tenggilis Mejoyo, Surabaya, Jawa Timur 60293
+           Jl. Raya Antapani | SEJATI INDAH RAYA 
+           <p>B/36, Probolinggo, Kec. Antapani Kidul, Bandung,</p>
+           <p> Jawa Barat 40291</p>
 
-          support@tiketevent.com
+          <p>support@kitatiketin.com</p>
 
-          +6289570968xxxx
+         <p> +62851xxxxxx </p>
        
       </div>
       <Footer/>

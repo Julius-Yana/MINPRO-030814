@@ -111,7 +111,7 @@ const Section = () => {
         <motion.img
           variants={image}
           className="md:mt-[40px]"
-          src="/nsync.jpg"
+          src="/westlife.png"
           alt="nsync"
         />
         <div className="hidden md:block text-4xl md:text-7xl text-slate-400 flex items-center mb-20 font-extrabold uppercase">
@@ -179,7 +179,7 @@ const Section = () => {
           </button>
         </motion.div>
 
-        <motion.img variants={image} src="/bsb.webp" alt="BackstreetBoys" />
+        <motion.img variants={image} src="/westlife.png" alt="BackstreetBoys" />
         <div className="hidden md:block text-4xl md:text-7xl text-slate-400 flex items-center font-extrabold uppercase">
           Elegant
         </div>
@@ -250,7 +250,7 @@ const Section = () => {
         <motion.img
           variants={image}
           className="md:mt-[40px]"
-          src="/a12.jpg"
+          src="/westlife.png"
           alt="A1"
         />
         <div className="hidden md:block text-4xl md:text-7xl text-slate-400 flex items-center mb-20 font-extrabold uppercase">
