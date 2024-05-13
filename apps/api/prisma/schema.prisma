@@ -15,33 +15,47 @@ model User {
   name        String
   email       String     @unique
   password    String
+  image       String?    @db.LongText
   isOrganizer Boolean    @default(false)
+  isActive    Boolean    @default(false)
   referral    Referral[]
   createdAt   DateTime   @default(now())
-  Point       Point[]   
+  Point       Point[]
   Discount    Discount[]
+  Event       Event[]
 }
 
 model Referral {
   id           Int    @id @default(autoincrement())
   referralCode String @unique
-  userId       Int    
+  userId       Int
   user         User   @relation(fields: [userId], references: [id])
 }
 
 model Point {
   id             Int      @id @default(autoincrement())
-  Amount         Int      
+  Amount         Int
   userId         Int
-  expirationDate DateTime 
+  expirationDate DateTime
   user           User     @relation(fields: [userId], references: [id])
 }
 
 model Discount {
   id             Int      @id @default(autoincrement())
-  discount       Int      
+  discount       Int
   expirationDate DateTime
   userId         Int
   user           User     @relation(fields: [userId], references: [id])
 }
 
+model Event {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String   @db.LongText
+  image       String   @db.LongText
+  price       Int
+  date        DateTime
+  location    String
+  organizer   User?    @relation(fields: [organizerId], references: [id])
+  organizerId Int? // Field untuk menyimpan ID pengguna yang membuat event
+}

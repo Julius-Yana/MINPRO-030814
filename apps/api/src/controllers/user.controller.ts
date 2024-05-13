@@ -4,10 +4,14 @@ import { genSalt, hash, compare } from 'bcrypt'
 import { responseError } from '@/helpers/responseError';
 import { generateToken } from '@/helpers/generateToken';
 import { Referral } from '@prisma/client';
+import path from 'path'
+import fs from "fs"
+import handlebars from 'handlebars'
+import { transporter } from '@/helpers/nodemailer';
 
 export const regUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, referralInput } = req.body
+    const { name, email, password, image } = req.body
     const salt = await genSalt(10)
     const hashPassword = await hash(password, salt)
     const newReferralCode: any = await generateReferralCode()
@@ -17,7 +21,7 @@ export const regUser = async (req: Request, res: Response) => {
         name,
         email,
         password: hashPassword,
-
+        image,
       }
     })
 
@@ -28,12 +32,56 @@ export const regUser = async (req: Request, res: Response) => {
       }
     })
 
+    const payload = {
+      id: users.id
+    }
+    const token = generateToken(payload)
+    const link = `http://localhost:3000/`
+
+    const templatePath = path.join(__dirname, "../templates", "register.html")
+    const templateSource = await fs.readFileSync(templatePath, 'utf-8')
+    const compileTemplate = handlebars.compile(templateSource)
+    const html = compileTemplate({
+      name: users.name,
+      link
+    })
+
+    await transporter.sendMail({
+      from: "kitatiketin@gmail.com",
+      to: users.email,
+      subject: "Please Verify Your Account",
+      html
+    })
+
+
     res.status(201).send({
       status: 'ok',
       message: 'User created!',
       users,
       newReferralCode,
+      token
     })
+  } catch (err) {
+    responseError(res, err)
+  }
+}
+
+export const verifyAccount = async (req: Request, res: Response) => {
+  try {
+    await prisma.user.update({
+      data: {
+        isActive : true
+      },
+      where:{
+        id: req.user?.id
+      }
+    })
+
+    res.status(200).send({
+      status: "ok",
+      message : "Verify Account Success"
+    })
+    
   } catch (err) {
     responseError(res, err)
   }
@@ -132,7 +180,7 @@ export const referralPoint = async (req: Request, res: Response) => {
       await prisma.point.update({
         where: { id: existingPoint.id },
         data: {
-          Amount: existingPoint.Amount + 10000, 
+          Amount: existingPoint.Amount + 10000,
           expirationDate: new Date(existingPoint.expirationDate.getTime() + 3 * 30 * 24 * 60 * 60 * 1000)
         },
       });
@@ -140,9 +188,9 @@ export const referralPoint = async (req: Request, res: Response) => {
       // Jika belum ada, buat entri baru di tabel Point
       await prisma.point.create({
         data: {
-          Amount: 10000, 
-          expirationDate: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000), 
-          userId: referral.userId, 
+          Amount: 10000,
+          expirationDate: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000),
+          userId: referral.userId,
         },
       });
     }
@@ -156,7 +204,7 @@ export const referralPoint = async (req: Request, res: Response) => {
       await prisma.discount.update({
         where: { id: existingDiscount.id },
         data: {
-          discount: existingDiscount.discount + 10, 
+          discount: existingDiscount.discount + 10,
           expirationDate: new Date(existingDiscount.expirationDate.getTime() + 3 * 30 * 24 * 60 * 60 * 1000)
         },
       });
@@ -164,9 +212,9 @@ export const referralPoint = async (req: Request, res: Response) => {
       // Jika belum ada, buat entri baru di tabel Point
       await prisma.discount.create({
         data: {
-          discount: 10, 
-          expirationDate: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000), 
-          userId: loggedInUser.id, 
+          discount: 10,
+          expirationDate: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000),
+          userId: loggedInUser.id,
         },
       });
     }
@@ -185,11 +233,11 @@ export const getUserPoint = async (req: Request, res: Response) => {
     // Cek login dulu guys
     const loggedInUser = req.user;
     if (!loggedInUser) throw new Error("User not authenticated");
-    
-  
+
+
     const point = await prisma.point.findFirst({
       where: {
-        userId : loggedInUser.id
+        userId: loggedInUser.id
       }
     })
     res.status(200).send({
@@ -207,11 +255,11 @@ export const getUserDiscount = async (req: Request, res: Response) => {
     // Cek login dulu guys
     const loggedInUser = req.user;
     if (!loggedInUser) throw new Error("User not authenticated");
-    
-  
+
+
     const discount = await prisma.discount.findFirst({
       where: {
-        userId : loggedInUser.id
+        userId: loggedInUser.id
       }
     })
     res.status(200).send({
@@ -223,3 +271,43 @@ export const getUserDiscount = async (req: Request, res: Response) => {
     responseError(res, err)
   }
 }
+
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { name, email, password, isOrganizer } = req.body;
+    //cek token
+    if (!req.user) throw new Error("User not authenticated");
+    const userId = req.user.id;
+
+    // Cek apakah pengguna ada berdasarkan ID token sudah sesuai belom yak
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+    if (!existingUser) throw new Error("User not found");
+
+    // update sesuai body
+    const updatedUserData: any = {};
+    if (name) updatedUserData.name = name;
+    if (email) updatedUserData.email = email;
+    if (isOrganizer) updatedUserData.isOrganizer = isOrganizer
+    if (password) {
+      const salt = await genSalt(10);
+      updatedUserData.password = await hash(password, salt);
+    }
+
+    // update prisma database bro
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: updatedUserData,
+    });
+
+    res.status(200).send({
+      status: "ok",
+      message: "User updated successfully!",
+      updatedUser,
+    });
+  } catch (err) {
+    responseError(res, err);
+  }
+};
+
