@@ -14,12 +14,12 @@ const Hero = () => {
 
   const item = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: 'smooth' } }, // Corrected typo "smoth" to "smooth"
+    show: { opacity: 1, y: 0, transition: { type: 'smooth' } },
   };
 
   const image = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: 'smooth' } }, // Corrected typo "smoth" to "smooth"
+    show: { opacity: 1, y: 0, transition: { type: 'smooth' } },
   };
   return (
     <div className="pt-28">
@@ -30,62 +30,108 @@ const Hero = () => {
         variants={container}
         className="flex flex-col items-center justify-between "
       >
-        <motion.h1
-          variants={item}
-          className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl"
-        >
-          Musik adalah cara
-        </motion.h1>
+        <h1 className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl">
+          Still in 90's atmosphere{' '}
+        </h1>
+        <p className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl">
+          Event Live Boysband
+        </p>
         <motion.p
-          variants={item}
-          className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl"
-        >
-          Untuk memberi tahu apa yg kita RASA
-        </motion.p>
-        {/* <motion.p
           variants={item}
           className="text-xl text-center w-10/12 mx-auto tracking-wider text-neutral-400 max-lg:text-base max-md:text-sm"
         >
-          Tiket is a music platform that allows you to listen to your favorite
-          music online.
-        </motion.p> */}
+          Event grup BoysBand era 90an ini dijamin bikin nuansa konsermu tambah
+          asikk sambil nostalgia 🎶
+        </motion.p>
       </motion.div>
-      <div className="mt-28 text-white">
-        <div className="p-2 relative">
-          <motion.img
-            initial={{ y: 0, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, type: 'keyframes' }}
-            className="w-full lg:h-[700px] md:h-[500px] h-[300px] object-cover object-top opacity-100"
-            src="/bsb.webp"
-            alt="backstreetBoys"
-          />
-          <motion.div
-            variants={container}
-            whileInView="show"
-            initial="hidden"
-            viewport={{ once: true }}
-            transition={{ delay: 1.5, delayChildren: 0.1 }}
-          >
-            <motion.span className="absolute top-4 left-4 lg:text-7xl text-4xl text-black">
-              Backstreet Boys
-            </motion.span>
-            <motion.span className="absolute bottom-8 left-4 lg:text-xl md:text-base text-sm max-sm:hidden">
-              Backstreet Boys atau disingkat BSB adalah grup vokal yang berasal
-              dari Orlando, Florida, Amerika Serikat. BSB terbentuk pada 20
-              April 1993. Pada mulanya, grup ini beranggotakan Nick Carter,
-              Howie Dorough, Brian Littrell, A.J. McLean, dan Kevin Richardson
-            </motion.span>
-            <motion.span className="absolute top-4 right-4 lg:text-xl md:text-base text-sm text-black">
-              Go and Buy the Tickets
-            </motion.span>
-            <motion.span className="absolute right-4 bottom-4 lg:text-xl md:text-base text-sm">
-              Jakarta, December 12
-            </motion.span>
-          </motion.div>
+      <div
+        data-hs-carousel='{
+    "loadingClasses": "opacity-0",
+    "isAutoPlay": true
+  }'
+        className="relative"
+      >
+        <div className="hs-carousel relative overflow-hidden w-full min-h-96 bg-white rounded-lg">
+          <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+            <div className="hs-carousel-slide">
+              <img src="/bsb800x200.jpg" className="w-full" />
+              <div className="flex justify-center h-full bg-gray-100 p-6 dark:bg-neutral-900">
+                <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">
+                  First slide
+                </span>
+              </div>
+            </div>
+            <div className="hs-carousel-slide">
+              <img src="/bsb800x200.jpg" className="w-full" />
+              <div className="flex justify-center h-full bg-gray-200 p-6 dark:bg-neutral-800">
+                <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">
+                  Second slide
+                </span>
+              </div>
+            </div>
+            <div className="hs-carousel-slide">
+              <img src="/bsb800x200.jpg" className="w-full" />
+              <div className="flex justify-center h-full bg-gray-300 p-6 dark:bg-neutral-700">
+                <span className="self-center text-4xl text-gray-800 transition duration-700 dark:text-white">
+                  Third slide
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-s-lg dark:text-white dark:hover:bg-white/10"
+        >
+          <span className="text-2xl" aria-hidden="true">
+            <svg
+              className="flex-shrink-0 size-5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </span>
+          <span className="sr-only">Previous</span>
+        </button>
+        <button
+          type="button"
+          className="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 rounded-e-lg dark:text-white dark:hover:bg-white/10"
+        >
+          <span className="sr-only">Next</span>
+          <span className="text-2xl" aria-hidden="true">
+            <svg
+              className="flex-shrink-0 size-5"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </span>
+        </button>
+
+        <div className="hs-carousel-pagination px-5 flex justify-center absolute bottom-3 start-0 end-0 space-x-2">
+          <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
+          <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
+          <span className="hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500"></span>
         </div>
       </div>
+      {/* <!-- End Slider --> */}
     </div>
   );
 };

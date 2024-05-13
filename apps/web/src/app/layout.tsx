@@ -4,6 +4,7 @@ import './globals.css';
 import Container from '@/components/Container';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
+import PrelineScript from '@/components/PrelineScript';
 
 const inter = Viaoda_Libre({ weight: ['400'], subsets: ['latin'] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
         </Container>
         {/* <Footer /> */}
       </body>
+      <PrelineScript/>
     </html>
   );
 }

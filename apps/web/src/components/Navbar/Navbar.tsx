@@ -22,7 +22,7 @@ const Navbar = () => {
             <Link href="/">
               <Image
                 priority={true}
-                src="/logo.png"
+                src="/logotiketin.png"
                 alt="logo"
                 width={196}
                 height={20}
@@ -35,7 +35,7 @@ const Navbar = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             variants={container}
-            className="flex flex-row items-center lg:space-x-10 space-x-6 max-md:hidden"
+            className="flex flex-row font-bold text-3xl items-center lg:space-x-10 space-x-6 max-md:hidden"
           >
             <li>
               <Link
@@ -48,7 +48,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="border-slate-600 hover:border-primary hover:bg-primary hover:text-white"
-                href=""
+                href="/event"
               >
                 Event
               </Link>
@@ -56,7 +56,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="border-slate-600 hover:border-primary hover:bg-primary hover:text-white"
-                href=""
+                href="/tentang"
               >
                 Tentang Kami
               </Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="border-slate-600 hover:border-primary hover:bg-primary hover:text-white"
-                href=""
+                href="/kontak"
               >
                 Kontak
               </Link>
@@ -77,13 +77,13 @@ const Navbar = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
             variants={container}
-            className="flex flex-row items-center justify-between cursor-pointer space-x-5"
+            className="flex flex-row items-center text-3xl hover justify-between cursor-pointer space-x-5"
           >
-            <button className="lg:px-7 py-2 px-10 bg-white text-black">
+            <button className="lg:px-7 py-2 px-10 bg-emerald-500 text-black rounded-sm">
               <Link href="/login">Log In</Link>
             </button>
-            <button className="lg:px-7 py-2 px-10 bg-white text-black">
-              <Link href="/register">Register</Link>
+            <button className="lg:px-7 py-2 px-10 bg-white text-black rounded-sm">
+              <Link href="/register ">Register</Link>
             </button>
           </motion.div>
         </div>
