@@ -35,7 +35,7 @@ const Navbar = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             variants={container}
-            className="flex flex-row items-center lg:space-x-10 space-x-6 max-md:hidden"
+            className="flex flex-row font-bold text-3xl items-center lg:space-x-10 space-x-6 max-md:hidden"
           >
             <li>
               <Link
@@ -77,7 +77,7 @@ const Navbar = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
             variants={container}
-            className="flex flex-row items-center justify-between cursor-pointer space-x-5"
+            className="flex flex-row items-center text-3xl hover justify-between cursor-pointer space-x-5"
           >
             <button className="lg:px-7 py-2 px-10 bg-emerald-500 text-black rounded-sm">
               <Link href="/login">Log In</Link>

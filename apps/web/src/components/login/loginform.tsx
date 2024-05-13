@@ -48,7 +48,7 @@ export default function LoginForm() {
                 </h1>
                 <div className='flex justify-center mb-0'>
                   <p>Tidak puny akun ?</p>
-                  <a className='text-info' href='/'>  Daftar Sekarang</a> 
+                  <a className='text-info' href='/register'>  Daftar Sekarang</a> 
                 </div>
               </div>
               <div className="mt-10">
