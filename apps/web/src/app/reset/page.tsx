@@ -6,7 +6,7 @@ import Footer from '@/components/Footer/Footer';
 export default function Reset() {
   const [email, setEmail] = useState('');
 
-  const handleChange = (event) => {
+  const handleChange = (event:any) => {
     setEmail(event.target.value);
   };
 

@@ -64,7 +64,7 @@ export const regUser = async (req: Request, res: Response) => {
   } catch (err) {
     responseError(res, err)
   }
-}
+};
 
 export const verifyAccount = async (req: Request, res: Response) => {
   try {
@@ -85,7 +85,7 @@ export const verifyAccount = async (req: Request, res: Response) => {
   } catch (err) {
     responseError(res, err)
   }
-}
+};
 
 export async function generateReferralCode() {
   const word = "abcdefghijklmnopqrstuvwxyz123456789"
@@ -108,7 +108,7 @@ export async function generateReferralCode() {
 
   return referralCode
 
-}
+};
 
 export const loginUser = async (req: Request, res: Response) => {
   try {
@@ -136,7 +136,7 @@ export const loginUser = async (req: Request, res: Response) => {
   } catch (err) {
     responseError(res, err)
   }
-}
+};
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -154,7 +154,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
   } catch (err) {
     responseError(res, err)
   }
-}
+};
 
 export const referralPoint = async (req: Request, res: Response) => {
   try {
@@ -248,7 +248,7 @@ export const getUserPoint = async (req: Request, res: Response) => {
   } catch (err) {
     responseError(res, err)
   }
-}
+};
 
 export const getUserDiscount = async (req: Request, res: Response) => {
   try {
@@ -270,7 +270,7 @@ export const getUserDiscount = async (req: Request, res: Response) => {
   } catch (err) {
     responseError(res, err)
   }
-}
+};
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
@@ -311,3 +311,27 @@ export const updateUser = async (req: Request, res: Response) => {
   }
 };
 
+export const imageUser = async (req: Request, res: Response) => {
+  try {
+      const { file } = req
+      if (!file) throw "No File Uploaded!"
+      const imageUrl = `http://localhost:8000/public/images/${file.filename}`
+
+      await prisma.user.update({
+          data: {
+              image: imageUrl
+          },
+          where: {
+              id: req.user?.id
+          }
+      })
+
+      res.status(200).send({
+          status: 'ok',
+          message: 'Upload image success'
+      })
+
+  } catch (err) {
+    responseError(res, err);
+  }
+}

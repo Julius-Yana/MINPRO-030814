@@ -46,7 +46,6 @@ export default function Home() {
       </div>
       <hr className="w-full mt-16" />
       <Book />
-      <Footer />
     </div>
   );
 }
