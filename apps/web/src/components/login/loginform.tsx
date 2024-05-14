@@ -1,6 +1,8 @@
-'use client';
+"use client"
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
+import axios from 'axios';
+import { useState } from 'react';
 import Footer from '../Footer/Footer';
 
 const LoginSchema = yup.object().shape({
@@ -12,19 +14,19 @@ const LoginSchema = yup.object().shape({
 });
 
 export default function LoginForm() {
-  // const search = useSearchParams()
-  // const redirect = search.get('redirect') || '/'
-  // const dispatch = useAppDispatch()
+  const [error, setError] = useState('');
 
-  // const onLogin = async (data: any) => {
-  // try {
-  //   const res = await loginAuthor(data)
-  //   dispatch(setUser(res.author))
-  //     //   createToken(res.token, redirect)
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  // }
+  const onLogin = async (values:any) => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/users/login', values);
+      console.log(response.data);
+      window.location.href = '/';
+    } catch (err) {
+      console.error(err);
+      setError("Wrong Password");
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -33,8 +35,7 @@ export default function LoginForm() {
       }}
       validationSchema={LoginSchema}
       onSubmit={(values, action) => {
-        console.log(values);
-        // onLogin(values)
+        onLogin(values);
         action.resetForm();
       }}
     >
@@ -47,8 +48,8 @@ export default function LoginForm() {
                   Masuk untuk membeli tiket!
                 </h1>
                 <div className='flex justify-center mb-0'>
-                  <p>Tidak puny akun ?</p>
-                  <a className='text-info' href='/register'>  Daftar Sekarang</a> 
+                  <p>Tidak punya akun ?</p>
+                  <a className='text-info' href='/register'> Daftar Sekarang</a> 
                 </div>
               </div>
               <div className="mt-10">
@@ -86,7 +87,9 @@ export default function LoginForm() {
                   <div className='password-button' data-pasword-field-btn></div>
                 </div>
               </div>
-              {/* Teks lupa kata sandi */}
+              {error && (
+                <div className="text-sm text-red-500 text-center mt-2">{error}</div>
+              )}
               <div className="mt-2 text-sm text-white text-center">
                 <a href="/reset">Lupa kata sandi?</a>
               </div>
