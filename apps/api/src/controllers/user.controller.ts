@@ -36,7 +36,7 @@ export const regUser = async (req: Request, res: Response) => {
       id: users.id
     }
     const token = generateToken(payload)
-    const link = `http://localhost:3000/`
+    const link = `http://localhost:3000/verify/${token}`
 
     const templatePath = path.join(__dirname, "../templates", "register.html")
     const templateSource = await fs.readFileSync(templatePath, 'utf-8')
@@ -52,7 +52,6 @@ export const regUser = async (req: Request, res: Response) => {
       subject: "Please Verify Your Account",
       html
     })
-
 
     res.status(201).send({
       status: 'ok',
