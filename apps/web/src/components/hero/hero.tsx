@@ -36,13 +36,7 @@ const Hero = () => {
         <p className="text-center text-9xl pb-2 leading-snug max-lg:text-7xl max-md:text-5xl">
           Event Live Boysband
         </p>
-        <motion.p
-          variants={item}
-          className="text-xl text-center w-10/12 mx-auto tracking-wider text-neutral-400 max-lg:text-base max-md:text-sm"
-        >
-          Event grup BoysBand era 90an ini dijamin bikin nuansa konsermu tambah
-          asikk sambil nostalgia 🎶
-        </motion.p>
+        
       </motion.div>
       <div
         data-hs-carousel='{
