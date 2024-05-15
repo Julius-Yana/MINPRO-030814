@@ -1,9 +1,12 @@
-'use client';
+"use client"
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import Footer from '../Footer/Footer';
+import { useState } from 'react';
+import axios from 'axios';
 
-const LoginSchema = yup.object().shape({
+const RegisterSchema = yup.object().shape({
+  name: yup.string().required('Nama tidak boleh kosong'),
   email: yup.string().email('Email tidak valid').required('Email diperlukan'),
   password: yup
     .string()
@@ -16,20 +19,40 @@ const LoginSchema = yup.object().shape({
       'Password dan Konfirmasi Password harus sama',
     )
     .required('Konfirmasi Password diperlukan'),
+  referralCode: yup.string().length(6, 'Referral code harus terdiri dari 6 karakter').nullable()
 });
 
-export default function RegisterForm() {
+export default function registerForm() {
+  const [error, setError] = useState('');
+
+  const onRegister = async (values:any) => {
+    try {
+      const { referralCodeCheckbox, ...data } = values;
+      if (!referralCodeCheckbox) delete data.referralCode;
+      
+      const response = await axios.post('http://localhost:8000/api/users', data);
+      console.log(response.data);
+      setError(''); // Reset error jika berhasil
+      window.location.href = '/verify'; // Arahkan ke halaman /verify setelah pendaftaran berhasil
+    } catch (err) {
+      console.error(err);
+      setError('Failed to register. Please check your details.'); // Set error message
+    }
+  };
+
   return (
     <Formik
       initialValues={{
+        name:'',
         email: '',
         password: '',
         confirmPassword: '',
+        referralCode: '',
+        referralCodeCheckbox: false
       }}
-      validationSchema={LoginSchema}
+      validationSchema={RegisterSchema}
       onSubmit={(values, action) => {
-        console.log(values);
-        // onLogin(values)
+        onRegister(values);
         action.resetForm();
       }}
     >
@@ -161,6 +184,10 @@ export default function RegisterForm() {
               >
                 Daftar
               </button>
+              {/* Tampilkan pesan kesalahan jika gagal mendaftar */}
+              {error && (
+                <div className="text-sm text-red-500 text-center mt-2">{error}</div>
+              )}
             </div>
           </Form>
         );
