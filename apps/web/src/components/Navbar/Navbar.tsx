@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+
 import axios from 'axios';
 
 const Navbar = () => {
@@ -117,6 +118,7 @@ const Navbar = () => {
             variants={container}
             className="flex flex-row items-center text-3xl hover justify-between cursor-pointer space-x-5"
           >
+
             {isLoggedIn ? (
               <>
                 <button
@@ -124,10 +126,12 @@ const Navbar = () => {
                   className="lg:px-7 py-2 px-10 bg-white text-black rounded-sm"
                 >
                   Log Out
+
                 </button>
               </>
             ) : (
               <>
+
               <Link href="/login">
                 <button
                   onClick={handleLogin}

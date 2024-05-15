@@ -20,9 +20,9 @@ export default function Home() {
         >
           <path
             d="M1 1L181.247 1119.45L329.925 1L496.52 1119.456L653.09 1L835.258 1144L987.988 1L1160.34 1119.45L1289.61 1L1501 111.9"
-            fill="#FF"
-            fill-opacity="0.1"
-            stroke="#FF"
+            fill="white"
+            fill-opacity="0.3"
+            stroke="white"
             stroke-width="0.5"
             stroke-linejoin="round"
           />

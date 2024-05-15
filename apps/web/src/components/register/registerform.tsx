@@ -158,15 +158,17 @@ export default function registerForm() {
                     type="text"
                     className="block w-full rounded-md border-0 p-8 max-w-[1000px] text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
                   />
-                  {/* Checkbox di samping form referral code */}
-                  <label className="text-white">
+                  <button type="button" className=" w-full text-center p-8 max-w-[200px] inline-flex  gap-x-2 text-2xl font-semibold rounded-lg border border-white  text-white hover:border-white/70 hover:text-white/70 disabled:opacity-50 disabled:pointer-events-none">
+  Check
+</button>
+                  {/* <label className="text-white">
                     <Field
                       type="checkbox"
                       name="referralCodeCheckbox"
                       className="form-checkbox h-5 w-5 text-indigo-600 ml-5"
                     />
                     <span className="ml-2">Saya memiliki kode referral</span>
-                  </label>
+                  </label> */}
                 </div>
                 <ErrorMessage
                   name="referralCode"
