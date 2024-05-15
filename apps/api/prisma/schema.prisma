@@ -11,18 +11,18 @@ datasource db {
 }
 
 model User {
-  id          Int        @id @default(autoincrement())
-  name        String
-  email       String     @unique
-  password    String
-  image       String?    @db.LongText
-  isOrganizer Boolean    @default(false)
-  isActive    Boolean    @default(false)
-  referral    Referral[]
-  createdAt   DateTime   @default(now())
-  Point       Point[]
-  Discount    Discount[]
-  Event       Event[]
+  id           Int        @id @default(autoincrement())
+  name         String
+  email        String     @unique
+  password     String
+  image        String?    @db.LongText
+  role         Role       @default(user)
+  isActive     Boolean    @default(false)
+  referral     Referral[]
+  createdAt    DateTime   @default(now())
+  Point        Point[]
+  Discount     Discount[]
+  Event        Event[]
 }
 
 model Referral {
@@ -57,5 +57,11 @@ model Event {
   date        DateTime
   location    String
   organizer   User?    @relation(fields: [organizerId], references: [id])
-  organizerId Int? // Field untuk menyimpan ID pengguna yang membuat event
+  organizerId Int?     // Field untuk menyimpan ID pengguna yang membuat event
+}
+
+enum Role {
+  superadmin
+  user
+  organizer
 }
