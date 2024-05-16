@@ -3,7 +3,6 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
 import { useState } from 'react';
-import Footer from '../Footer/Footer';
 
 const LoginSchema = yup.object().shape({
   email: yup.string().email('invalid email').required('email required'),
@@ -19,13 +18,22 @@ export default function LoginForm() {
   const onLogin = async (values:any) => {
     try {
       const response = await axios.post('http://localhost:8000/api/users/login', values);
+      const { token } = response.data;
+      localStorage.setItem('token', token); // Simpan token ke localStorage
       console.log(response.data);
-      window.location.href = '/';
-    } catch (err) {
+      window.location.href = '/'; // Redirect ke halaman utama setelah login berhasil
+    } catch (err:any) {
       console.error(err);
-      setError("Wrong Password");
+      if (err.response && err.response.status === 401) {
+        setError('Invalid email or password');
+      } else {
+        setError('User not active, please verify your account');
+      }
     }
   };
+
+  
+  
 
   return (
     <Formik

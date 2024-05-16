@@ -4,8 +4,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import axios from 'axios';
-
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -13,34 +11,13 @@ const Navbar = () => {
     // Lakukan pengecekan status login di sini menggunakan token
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token); // Ubah isLoggedIn menjadi true jika token ada
-  }, []);
+  }, [isLoggedIn]);
 
   const handleLogout = () => {
     // Hapus token dari penyimpanan lokal
     localStorage.removeItem('token');
     // Set isLoggedIn menjadi false
     setIsLoggedIn(false);
-  };
-
-  const handleLogin = async () => {
-    try {
-      // Lakukan permintaan login ke backend menggunakan Axios
-      const response = await axios.post('http://localhost:8000/api/users/login', {
-        // Masukkan data login di sini
-        email: '',
-        password: '',
-      });
-
-      // Dapatkan token dari respons dan simpan di penyimpanan lokal
-      const { token } = response.data;
-      localStorage.setItem('token', token);
-
-      // Set isLoggedIn menjadi true setelah login berhasil
-      setIsLoggedIn(true);
-    } catch (error) {
-      // Tangani kesalahan jika login gagal
-      console.error('Login failed:', error);
-    }
   };
 
   const container = {
@@ -132,13 +109,12 @@ const Navbar = () => {
             ) : (
               <>
 
-              <Link href="/login">
-                <button
-                  onClick={handleLogin}
-                  className="lg:px-7 py-2 px-10 bg-emerald-500 text-black rounded-sm"
-                >
-                  Log In
-                </button>
+                <Link href="/login">
+                  <button
+                    className="lg:px-7 py-2 px-10 bg-emerald-500 text-black rounded-sm"
+                  >
+                    Log In
+                  </button>
                 </Link>
                 <button className="lg:px-7 py-2 px-10 bg-white text-black rounded-sm">
                   <Link href="/register">Register</Link>

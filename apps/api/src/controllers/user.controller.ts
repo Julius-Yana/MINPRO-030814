@@ -111,29 +111,36 @@ export async function generateReferralCode() {
 
 export const loginUser = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body
-    const users = await prisma.user.findUnique({
-      where: { email }
-    })
+    const { email, password } = req.body;
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
 
-    if (!users) throw 'user not found!'
+    if (!user) {
+      throw new Error('User not found!');
+    }
 
-    const isValidPass = await compare(password, users.password)
-    if (!isValidPass) throw 'wrong password!'
+    const isValidPass = await compare(password, user.password);
+    if (!isValidPass) {
+      throw new Error('Wrong password!');
+    }
+
+    if (!user.isActive) {
+      throw new Error('User is not active, please verify your account!');
+    }
 
     const payload = {
-      id: users.id
-    }
-    const token = generateToken(payload)
+      id: user.id,
+    };
+    const token = generateToken(payload);
 
     res.status(200).send({
       status: 'ok',
       token,
-      users
-    })
-
+      user,
+    });
   } catch (err) {
-    responseError(res, err)
+    responseError(res, err);
   }
 };
 

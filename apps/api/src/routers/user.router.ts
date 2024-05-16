@@ -3,6 +3,7 @@ import { getAllUsers, getUserDiscount, getUserPoint, imageUser, loginUser, refer
 import { validateRegister } from '@/middlewares/validator'
 import { verifyToken } from '@/middlewares/verifyToken'
 import { uploader } from '@/helpers/uploader'
+import userActive from '@/middlewares/useractive'
 
 const userRouter = Router()
 
