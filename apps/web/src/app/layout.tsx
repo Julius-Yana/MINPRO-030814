@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Container>
           <Navbar />
-          <div className='bg-black'>
+          <div>
           {children}
           </div>
         </Container>

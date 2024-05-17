@@ -6,7 +6,7 @@ import Hero from '@/components/hero/hero';
 import Section from '@/components/hero/section';
 import Schedule from '@/components/Schedule/schedule';
 
-export default function Home() {
+export default function HomeAll() {
   return (
     <div>
       <div className="relative">

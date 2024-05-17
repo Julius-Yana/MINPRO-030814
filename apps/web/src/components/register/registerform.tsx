@@ -1,9 +1,9 @@
 "use client"
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
-import Footer from '../Footer/Footer';
 import { useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 const RegisterSchema = yup.object().shape({
   name: yup.string().required('Nama tidak boleh kosong'),
@@ -22,10 +22,25 @@ const RegisterSchema = yup.object().shape({
   referralCode: yup.string().length(6, 'Referral code harus terdiri dari 6 karakter').nullable()
 });
 
-export default function registerForm() {
+export default function RegisterForm() {
   const [error, setError] = useState('');
+  const [isReferralExist, setIsReferralExist] = useState(false);
+  const [referralMessage, setReferralMessage] = useState('');
 
-  const onRegister = async (values:any) => {
+  const handleCheckReferral = async (values:any) => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/users/checkreferral', {
+        referralCode: values.referralCode
+      });
+      setIsReferralExist(true);
+      setReferralMessage(response.data.message);
+    } catch (err) {
+      setIsReferralExist(false);
+      setReferralMessage('Referral Code does not exist, please check again!');
+    }
+  };
+
+  const handleRegister = async (values:any, action:any) => {
     try {
       const { referralCodeCheckbox, ...data } = values;
       if (!referralCodeCheckbox) delete data.referralCode;
@@ -52,11 +67,10 @@ export default function registerForm() {
       }}
       validationSchema={RegisterSchema}
       onSubmit={(values, action) => {
-        onRegister(values);
-        action.resetForm();
+        handleRegister(values, action);
       }}
     >
-      {() => {
+      {({ values }) => {
         return (
           <Form>
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-2">
@@ -66,20 +80,20 @@ export default function registerForm() {
                 </h1>
                 <div className="flex justify-center mb-0">
                   <p>Sudah punya akun?</p>
-                  <a className="text-info" href="/login">
+                  <Link className="text-info" href="/login">
                     Masuk
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-10">
-                <label className="block text-sm font-medium leading-6 text-white">
+                <label className="block text-sm font-medium leading-6 text-black">
                   Nama
                 </label>
                 <div className="mt-2">
                   <Field
                     name="name"
                     type="text"
-                    className="block w-full rounded-md border-0 p-8 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
+                    className="block w-full rounded-md border-0 p-8 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
                   />
                   <ErrorMessage
                     name="name"
@@ -90,14 +104,14 @@ export default function registerForm() {
               </div>
 
               <div className="mt-10">
-                <label className="block text-sm font-medium leading-6 text-white">
+                <label className="block text-sm font-medium leading-6 text-black">
                   Email
                 </label>
                 <div className="mt-2">
                   <Field
                     name="email"
                     type="text"
-                    className="block w-full rounded-md border-0 p-8 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
+                    className="block w-full rounded-md border-0 p-8 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
                   />
                   <ErrorMessage
                     name="email"
@@ -107,14 +121,14 @@ export default function registerForm() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium leading-6 text-white">
+                <label className="block text-sm font-medium leading-6 text-black">
                   Password
                 </label>
                 <div className="mt-2">
                   <Field
                     name="password"
                     type="password"
-                    className="block w-full rounded-md border-0 p-8 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
+                    className="block w-full rounded-md border-0 p-8 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
                   />
                   <ErrorMessage
                     name="password"
@@ -128,14 +142,14 @@ export default function registerForm() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium leading-6 text-white">
+                <label className="block text-sm font-medium leading-6 text-black">
                   Konfirmasi Password
                 </label>
                 <div className="mt-2">
                   <Field
                     name="confirmPassword"
                     type="password"
-                    className="block w-full rounded-md border-0 p-8 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
+                    className="block w-full rounded-md border-0 p-8 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
                   />
                   <ErrorMessage
                     name="confirmPassword"
@@ -149,35 +163,29 @@ export default function registerForm() {
                 </div>
               </div>
               <div className="mt-2 ">
-                <label className="block text-sm font-medium leading-6 text-white">
+                <label className="block text-sm font-medium leading-6 text-black">
                   Referral Code
                 </label>
                 <div className="mt-2 flex items-center justify-between">
                   <Field
                     name="referralCode"
                     type="text"
-                    className="block w-full rounded-md border-0 p-8 max-w-[1000px] text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
+                    className="block w-full rounded-md border-0 p-8 max-w-[1000px] text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-3xl sm:leading-6"
                   />
-                  <button type="button" className=" w-full text-center p-8 max-w-[200px] inline-flex  gap-x-2 text-2xl font-semibold rounded-lg border border-white  text-white hover:border-white/70 hover:text-white/70 disabled:opacity-50 disabled:pointer-events-none">
-  Check
-</button>
-                  {/* <label className="text-white">
-                    <Field
-                      type="checkbox"
-                      name="referralCodeCheckbox"
-                      className="form-checkbox h-5 w-5 text-indigo-600 ml-5"
-                    />
-                    <span className="ml-2">Saya memiliki kode referral</span>
-                  </label> */}
+                  <button
+                    type="button"
+                    className="w-full text-center p-8 max-w-[200px] inline-flex gap-x-2 text-2xl font-semibold rounded-lg border border-black text-black hover:border-blue-500 hover:text-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                    onClick={() => handleCheckReferral(values)}
+                  >
+                    {isReferralExist ? '✓' : 'Check'}
+                  </button>
                 </div>
-                <ErrorMessage
-                  name="referralCode"
-                  component={'div'}
-                  className="text-sm text-red-500"
-                />
+                {referralMessage && (
+                  <div className="text-sm text-red-500 mt-2">{referralMessage}</div>
+                )}
               </div>
               {/* Form lainnya */}
-              <div className="mt-10">{/* Form lainnya */}</div>
+              {/* Tombol submit */}
               <button
                 type="submit"
                 className="w-full mt-6 p-1.5 text-sm font-medium p-8 rounded-md bg-orange-500 text-black font-semibold"
