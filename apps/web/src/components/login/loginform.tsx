@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const LoginSchema = yup.object().shape({
   email: yup.string().email('invalid email').required('email required'),
@@ -57,18 +58,18 @@ export default function LoginForm() {
                 </h1>
                 <div className='flex justify-center mb-0'>
                   <p>Tidak punya akun ?</p>
-                  <a className='text-info' href='/register'> Daftar Sekarang</a> 
+                  <Link className='text-info' href='/register'> Daftar Sekarang</Link> 
                 </div>
               </div>
               <div className="mt-10">
-                <label className="block text-sm font-medium leading-6 text-white">
+                <label className="block text-sm font-medium leading-6 text-black">
                   Email
                 </label>
                 <div className="mt-2">
                   <Field
                     name="email"
                     type="text"
-                    className="block w-full rounded-md border-0 p-8 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 p-8 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                   <ErrorMessage
                     name="email"
@@ -78,14 +79,14 @@ export default function LoginForm() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium leading-6 text-white">
+                <label className="block text-sm font-medium leading-6 text-black">
                   Password
                 </label>
                 <div className="mt-2">
                   <Field
                     name="password"
                     type="password"
-                    className="block w-full rounded-md border-0 p-8 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 p-8 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                   <ErrorMessage
                     name="password"
@@ -98,7 +99,7 @@ export default function LoginForm() {
               {error && (
                 <div className="text-sm text-red-500 text-center mt-2">{error}</div>
               )}
-              <div className="mt-2 text-sm text-white text-center">
+              <div className="mt-2 text-sm text-black text-center">
                 <a href="/reset">Lupa kata sandi?</a>
               </div>
               <button

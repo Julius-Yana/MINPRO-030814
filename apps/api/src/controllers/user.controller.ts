@@ -148,7 +148,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const users = await prisma.user.findMany({
       include: {
-        referral: true
+        referral: true,
+        Point: true,
+        Discount: true
       }
     })
     res.status(200).send({
@@ -233,6 +235,26 @@ export const referralPoint = async (req: Request, res: Response) => {
     responseError(res, err);
   }
 };
+
+export const checkReferral = async (req: Request, res: Response) => {
+  try {
+    const { referralCode } = req.body;
+
+    // Cari referral berdasarkan referralCode
+    const referral = await prisma.referral.findUnique({
+      where: { referralCode },
+    });
+    if (!referral) throw new Error("Referral Code Not Found");
+
+    res.status(200).send({
+      status: "ok",
+      message: "Referral Code Exist, Please submit!",
+    });
+  } catch (err) {
+    responseError(res, err);
+  }
+};
+
 
 export const getUserPoint = async (req: Request, res: Response) => {
   try {
