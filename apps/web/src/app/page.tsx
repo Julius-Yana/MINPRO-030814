@@ -3,8 +3,8 @@ import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
 import Container from '@/components/Container';
 import Hero from '@/components/hero/hero';
-import Section from '@/components/hero/section';
 import Schedule from '@/components/Schedule/schedule';
+import Section from '@/components/Section/section';
 
 export default function HomeAll() {
   return (

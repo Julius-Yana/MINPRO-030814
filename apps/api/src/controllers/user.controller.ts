@@ -3,7 +3,7 @@ import prisma from '@/prisma';
 import { genSalt, hash, compare } from 'bcrypt'
 import { responseError } from '@/helpers/responseError';
 import { generateToken } from '@/helpers/generateToken';
-import { Referral } from '@prisma/client';
+import { Referral, Role } from '@prisma/client';
 import path from 'path'
 import fs from "fs"
 import handlebars from 'handlebars'
@@ -36,7 +36,7 @@ export const regUser = async (req: Request, res: Response) => {
       id: users.id
     }
     const token = generateToken(payload)
-    const link = `http://localhost:3000/verify/${token}`
+    const link = `http://localhost:3000/verifyusers/${token}`
 
     const templatePath = path.join(__dirname, "../templates", "register.html")
     const templateSource = await fs.readFileSync(templatePath, 'utf-8')
@@ -67,22 +67,46 @@ export const regUser = async (req: Request, res: Response) => {
 
 export const verifyAccount = async (req: Request, res: Response) => {
   try {
-    await prisma.user.update({
-      data: {
-        isActive : true
-      },
-      where:{
-        id: req.user?.id
-      }
-    })
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(400).send({ status: 'error', message: 'Invalid token' });
+    }
 
-    res.status(200).send({
-      status: "ok",
-      message : "Verify Account Success"
-    })
-    
+    await prisma.user.update({
+      data: { isActive: true },
+      where: { id: userId }
+    });
+
+    res.status(200).send({ status: 'ok', message: 'Verify Account Success' });
   } catch (err) {
     responseError(res, err)
+  }
+};
+
+export const getUserByToken = async (req: Request, res: Response) => {
+  try {
+    if (!req.user) throw new Error('User not authenticated');
+    const userId = req.user.id;
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: { referral: true }
+    });
+
+    if (!user) throw new Error('User not found');
+
+    res.status(200).send({
+      status: 'ok',
+      user: {
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        role: user.role,
+        referralCode: user.referral[0]?.referralCode || ''  // Mengambil referralCode
+      },
+    });
+  } catch (err) {
+    responseError(res, err);
   }
 };
 
@@ -130,7 +154,7 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     const payload = {
-      id: user.id,
+      id: user.id
     };
     const token = generateToken(payload);
 
@@ -150,7 +174,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
       include: {
         referral: true,
         Point: true,
-        Discount: true
+        Discount: true,
       }
     })
     res.status(200).send({
@@ -254,7 +278,6 @@ export const checkReferral = async (req: Request, res: Response) => {
     responseError(res, err);
   }
 };
-
 
 export const getUserPoint = async (req: Request, res: Response) => {
   try {
@@ -363,3 +386,30 @@ export const imageUser = async (req: Request, res: Response) => {
     responseError(res, err);
   }
 }
+
+export const getUserImage = async (req: Request, res: Response) => {
+  try {
+    // Check if the user is authenticated
+    if (!req.user) throw new Error("User not authenticated");
+    
+    // Get the user ID from the authenticated user
+    const userId = req.user.id;
+    
+    // Fetch the user's data from the database
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { image: true }  // Only select the image field
+    });
+
+    if (!user) throw new Error("User not found");
+
+    // Send the user's image URL in the response
+    res.status(200).send({
+      status: 'ok',
+      image: user.image
+    });
+  } catch (err) {
+    responseError(res, err);
+  }
+};
+
