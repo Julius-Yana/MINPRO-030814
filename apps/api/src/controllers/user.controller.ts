@@ -9,77 +9,151 @@ import fs from "fs"
 import handlebars from 'handlebars'
 import { transporter } from '@/helpers/nodemailer';
 
+
 export const regUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, image } = req.body
-    const salt = await genSalt(10)
-    const hashPassword = await hash(password, salt)
-    const newReferralCode: any = await generateReferralCode()
+    const { name, email, password, referall } = req.body;
+    const salt = await genSalt(10);
+    const hashPassword = await hash(password, salt);
+    // const newReferralCode: any = await generateReferralCode();
 
     const users = await prisma.user.create({
       data: {
         name,
         email,
         password: hashPassword,
-        image,
       }
-    })
+    });
 
-    await prisma.referral.create({
-      data: {
-        referralCode: newReferralCode,
-        userId: users.id
-      }
-    })
+    if (referall) {
+      const reffUser = await prisma.referral.findUnique({
+        where: { referralCode: referall }
+      });
+      if (!reffUser) throw new Error("Wrong referral code");
+    }
+
+    // await prisma.referral.create({
+    //   data: {
+    //     // referralCode: newReferralCode,
+    //     userId: users.id
+    //   }
+    // });
 
     const payload = {
-      id: users.id
-    }
-    const token = generateToken(payload)
-    const link = `http://localhost:3000/verifyusers/${token}`
+      id: users.id,
+      // ownerReferral: newReferralCode,
+      inputReferral: referall || null
+    };
+    const token = generateToken(payload);
+    const link = `http://localhost:3000/verifyusers/${token}`;
 
-    const templatePath = path.join(__dirname, "../templates", "register.html")
-    const templateSource = await fs.readFileSync(templatePath, 'utf-8')
-    const compileTemplate = handlebars.compile(templateSource)
+    const templatePath = path.join(__dirname, "../templates", "register.html");
+    const templateSource = await fs.readFileSync(templatePath, 'utf-8');
+    const compileTemplate = handlebars.compile(templateSource);
     const html = compileTemplate({
       name: users.name,
       link
-    })
+    });
 
     await transporter.sendMail({
       from: "kitatiketin@gmail.com",
       to: users.email,
       subject: "Please Verify Your Account",
       html
-    })
+    });
 
     res.status(201).send({
       status: 'ok',
       message: 'User created!',
       users,
-      newReferralCode,
+      // newReferralCode,
       token
-    })
+    });
   } catch (err) {
-    responseError(res, err)
+    responseError(res, err);
   }
+};
+
+
+export async function generateReferralCode() {
+  const word = "abcdefghijklmnopqrstuvwxyz123456789"
+  const referralLength = 6
+  let referralCode = ""
+
+  for (let i = 0; i < referralLength; i++) {
+    referralCode += word.charAt(Math.floor(Math.random() * word.length))
+  }
+
+  const existingReferral = await prisma.referral.findUnique({
+    where: {
+      referralCode
+    }
+  })
+
+  if (existingReferral!) {
+    return generateReferralCode
+  }
+
+  return referralCode
+
 };
 
 export const verifyAccount = async (req: Request, res: Response) => {
   try {
+    const newReferralCode: any = await generateReferralCode()
     const userId = req.user?.id;
+    const inputReferral = req.user?.inputReferral;
+    // const ownerReferral = req.user?.ownerReferral;
+
     if (!userId) {
       return res.status(400).send({ status: 'error', message: 'Invalid token' });
     }
 
-    await prisma.user.update({
+    console.log(`Activating user: ${userId}`);
+
+    const activateUser = await prisma.user.update({
       data: { isActive: true },
       where: { id: userId }
     });
 
+
+    await prisma.referral.create({
+      data: {
+        referralCode: newReferralCode,
+        userId: req.user?.id!
+      }
+    });
+
+    if (inputReferral) {
+      const reffUser = await prisma.referral.findUnique({
+        where: { referralCode: inputReferral }
+      });
+
+      if (!reffUser) {
+        throw new Error("Wrong referral code");
+      }
+
+
+
+      await prisma.point.create({
+        data: {
+          Amount: 10000,
+          expirationDate: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000), // 3 months
+          userId: reffUser.userId
+        }
+      });
+
+      await prisma.discount.create({
+        data: {
+          discount: 10,
+          expirationDate: new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000), // 3 months
+          userId: userId
+        }
+      });
+    }
     res.status(200).send({ status: 'ok', message: 'Verify Account Success' });
   } catch (err) {
-    responseError(res, err)
+    responseError(res, err);
   }
 };
 
@@ -108,29 +182,6 @@ export const getUserByToken = async (req: Request, res: Response) => {
   } catch (err) {
     responseError(res, err);
   }
-};
-
-export async function generateReferralCode() {
-  const word = "abcdefghijklmnopqrstuvwxyz123456789"
-  const referralLength = 6
-  let referralCode = ""
-
-  for (let i = 0; i < referralLength; i++) {
-    referralCode += word.charAt(Math.floor(Math.random() * word.length))
-  }
-
-  const existingReferral = await prisma.referral.findUnique({
-    where: {
-      referralCode
-    }
-  })
-
-  if (existingReferral!) {
-    return generateReferralCode
-  }
-
-  return referralCode
-
 };
 
 export const loginUser = async (req: Request, res: Response) => {
@@ -364,23 +415,23 @@ export const updateUser = async (req: Request, res: Response) => {
 
 export const imageUser = async (req: Request, res: Response) => {
   try {
-      const { file } = req
-      if (!file) throw "No File Uploaded!"
-      const imageUrl = `http://localhost:8000/public/images/${file.filename}`
+    const { file } = req
+    if (!file) throw "No File Uploaded!"
+    const imageUrl = `http://localhost:8000/public/images/${file.filename}`
 
-      await prisma.user.update({
-          data: {
-              image: imageUrl
-          },
-          where: {
-              id: req.user?.id
-          }
-      })
+    await prisma.user.update({
+      data: {
+        image: imageUrl
+      },
+      where: {
+        id: req.user?.id
+      }
+    })
 
-      res.status(200).send({
-          status: 'ok',
-          message: 'Upload image success'
-      })
+    res.status(200).send({
+      status: 'ok',
+      message: 'Upload image success'
+    })
 
   } catch (err) {
     responseError(res, err);
@@ -391,10 +442,10 @@ export const getUserImage = async (req: Request, res: Response) => {
   try {
     // Check if the user is authenticated
     if (!req.user) throw new Error("User not authenticated");
-    
+
     // Get the user ID from the authenticated user
     const userId = req.user.id;
-    
+
     // Fetch the user's data from the database
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -413,3 +464,64 @@ export const getUserImage = async (req: Request, res: Response) => {
   }
 };
 
+// Function to generate a random password
+const generateRandomPassword = (length = 8) => {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+};
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        status: 'error',
+        message: 'User not found!',
+      });
+    }
+
+    // Generate a new random password
+    const newPassword = generateRandomPassword();
+    const salt = await genSalt(10);
+    const hashedPassword = await hash(newPassword, salt);
+
+    // Update the user's password with the new hashed password
+    await prisma.user.update({
+      where: { email },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    const templatePath = path.join(__dirname, "../templates", "newPassword.html");
+    const templateSource = fs.readFileSync(templatePath, 'utf-8');
+    const compileTemplate = handlebars.compile(templateSource);
+    const html = compileTemplate({
+      name: user.name,
+      newPassword,
+    });
+
+    await transporter.sendMail({
+      from: "kitatiketin@gmail.com",
+      to: user.email,
+      subject: "Your New Password",
+      html,
+    });
+
+    return res.status(200).json({
+      status: 'ok',
+      message: 'A new password has been sent to your email.',
+    });
+  } catch (err) {
+    return responseError(res, err);
+  }
+};

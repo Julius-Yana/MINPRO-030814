@@ -8,23 +8,34 @@ export default function Page() {
   const router = useRouter()
 
   const handleVerify = async () => {
+    console.log('Starting verification process')
     try {
+      console.log('Fetching API:', `${process.env.NEXT_PUBLIC_BASE_API_URL}users/verify`)
+      console.log('Token:', params.token)
+      
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}users/verify`, {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${params.token}`
         }
       })
+
+      console.log('API response status:', res.status)
+      console.log('API response:', res)
+
       if (res.ok) {
         window.alert('Account successfully verified!')
+        console.log('Verification successful, redirecting to login...')
         router.push('/login')
       } else {
+        const errorData = await res.json();
+        console.error('Verification failed:', errorData)
         window.alert('Verification failed. Please try again.')
       }
     } catch (err) {
+      console.error('An error occurred during verification:', err)
       window.alert('An error occurred. Please try again.')
-      console.log(err);
     }
   }
 

@@ -1,6 +1,8 @@
 type User = {
-    id: number,
+    id: number
     role: string
+    ownerReferral?: string;
+  inputReferral?: string;
     
 }
 
