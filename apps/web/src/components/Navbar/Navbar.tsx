@@ -7,21 +7,38 @@ import axios from 'axios';
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState('');
   const [userPoint, setUserPoint] = useState(0);
+  const [userPointExpiration, setUserPointExpiration] = useState('');
   const [userDiscount, setUserDiscount] = useState(0);
+  const [userDiscountExpiration, setUserDiscountExpiration] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
 
     if (token) {
+      axios.get('http://localhost:8000/api/users/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        setUserRole(response.data.user.role);
+      })
+      .catch(error => {
+        console.error('Error fetching user role:', error);
+      });
+
       axios.get('http://localhost:8000/api/users/point', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       .then(response => {
-        setUserPoint(response.data.point.Amount);
+        const point = response.data.point;
+        setUserPoint(point.Amount);
+        setUserPointExpiration(point.expirationDate);
       })
       .catch(error => {
         console.error('Error fetching user point:', error);
@@ -33,7 +50,9 @@ const Navbar = () => {
         }
       })
       .then(response => {
-        setUserDiscount(response.data.discount.discount);
+        const discount = response.data.discount;
+        setUserDiscount(discount.discount);
+        setUserDiscountExpiration(discount.expirationDate);
       })
       .catch(error => {
         console.error('Error fetching user discount:', error);
@@ -44,6 +63,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+    window.location.href = '/';
   };
 
   const container = {
@@ -80,9 +100,12 @@ const Navbar = () => {
           className="hidden md:flex flex-row font-semibold text-lg items-center space-x-8"
         >
           <li><Link href="/">Home</Link></li>
-          <li><Link href="/about">About</Link></li>
-          <li><Link href="/services">Services</Link></li>
-          <li><Link href="/contact">Contact</Link></li>
+          <li><Link href="/event">Event</Link></li>
+          <li><Link href="/tentang">Tentang Kami</Link></li>
+          <li><Link href="/kontak">Contact</Link></li>
+          {isLoggedIn && userRole === 'organizer' && (
+            <li><Link href="/my-event">Dashboard</Link></li>
+          )}
         </motion.ul>
         <motion.div
           initial="hidden"
@@ -95,8 +118,14 @@ const Navbar = () => {
           {isLoggedIn ? (
             <>
               <div className="flex flex-row items-center space-x-3">
-                <p>Point: </p><p className='text-green-500 pr-4'>{userPoint}</p>
-                <p>Discount Card: </p> <p className='text-green-500 pr-4'>{userDiscount}%</p>
+                <p>Point: </p>
+                <p className='text-green-500 pr-4'>
+                  {userPoint} (Expires: {new Date(userPointExpiration).toLocaleDateString()})
+                </p>
+                <p>Discount Card: </p> 
+                <p className='text-green-500 pr-4'>
+                  {userDiscount}% (Expires: {new Date(userDiscountExpiration).toLocaleDateString()})
+                </p>
                 <Link href="/profile">
                   <button className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700">
                     Edit Profile

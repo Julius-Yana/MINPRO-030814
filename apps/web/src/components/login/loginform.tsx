@@ -22,7 +22,21 @@ export default function LoginForm() {
       const { token } = response.data;
       localStorage.setItem('token', token); // Simpan token ke localStorage
       console.log(response.data);
-      window.location.href = '/'; // Redirect ke halaman utama setelah login berhasil
+      // Mengambil peran pengguna dari token dengan memanggil API profile
+      const profileResponse = await axios.get('http://localhost:8000/api/users/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const userRole = profileResponse.data.user.role;
+
+      // Redirect berdasarkan peran pengguna
+      if (userRole === 'superadmin') {
+        window.location.href = 'http://localhost:3000/admin'; // Redirect ke halaman admin
+      } else {
+        window.location.href = '/'; // Redirect ke halaman utama
+      }
     } catch (err:any) {
       console.error(err);
       if (err.response && err.response.status === 401) {
@@ -33,8 +47,7 @@ export default function LoginForm() {
     }
   };
 
-  
-  
+
 
   return (
     <Formik

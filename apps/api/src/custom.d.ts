@@ -1,5 +1,6 @@
 type User = {
-    id: number
+    id: number,
+    role: string
     
 }
 

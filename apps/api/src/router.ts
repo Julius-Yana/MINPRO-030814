@@ -1,5 +1,7 @@
 import { Router, Request, Response } from 'express'
 import { userRouter } from './routers/user.router'
+import eventRouter from './routers/event.router'
+import { superadminRouter } from './routers/superadmin.router'
 
 
 const router = Router()
@@ -12,7 +14,10 @@ router.get('/', (req: Request, res: Response) => {
     })
 })
 
+
 router.use('/users', userRouter)
+router.use('/event', eventRouter)
+router.use('/superadmin', superadminRouter)
 
 
 export default router
